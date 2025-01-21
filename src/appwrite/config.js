@@ -15,7 +15,7 @@ export class Service {
         try {
 
             const {  leaderName, leaderPhone,leaderEmail,leaderBranch, memberName,memberNumber,memberBranch,memberEmail} = data;
-            return await this.databases.createDocument(
+            const res=await this.databases.createDocument(
                 Conf.appwriteDatabaseId,
                 Conf.appwriteCollectionId,
                 ID.unique(),
@@ -30,8 +30,23 @@ export class Service {
                     memberEmail,
                     
                 }
+               
 
             )
+            return res.$id;
+            
+        } catch (error) {
+            console.log("please submit again", error);
+        }
+    }
+
+    async getdoc(id) {
+        //get a single document with the id variable
+        try {
+            if (!id) {
+                throw new Error("Document ID is required");
+            }
+            return await this.databases.getDocument(Conf.appwriteDatabaseId, Conf.appwriteCollectionId, id);
         } catch (error) {
             console.log("please submit again", error);
         }

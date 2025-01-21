@@ -5,6 +5,7 @@ import appwriteService from '../../appwrite/config';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import RazorpayButton from "..//RazorpayButton";
 
 const schema = z.object({
   leaderName: z.string().nonempty("Leader name is required"),
@@ -17,7 +18,7 @@ const schema = z.object({
       z.object({
         name: z.string().nonempty(),
         phone: z
-        
+
           .string()
           .regex(/^\d{10}$/, "phone must contain exactly 10 digits")
           .nonempty(),
@@ -27,15 +28,25 @@ const schema = z.object({
     )
     .nonempty(),
 
-   
-    
+
+
 });
 
 function Form() {
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
   });
+  const razorpayButtonRef = React.useRef(null);
   const [error, setError] = useState('');
+  const handlePaymentSuccess = (response) => {
+    console.log("Payment successful:", response);
+    // Save data to Appwrite or handle success
+  };
+
+  const handlePaymentFailure = (error) => {
+    console.error("Payment failed:", error);
+    alert("Payment failed. Please try again.");
+  };
 
   const create = async (data) => {
     console.log('Submit button clicked', data);
@@ -69,12 +80,16 @@ function Form() {
         data.members[3]?.Email,
       ],
     };
-    
+
     console.log('New data:', newData);
+    // razorpayButtonRef.current.click();
     
+
     try {
-      const formData = await appwriteService.createdoc(newData);
-      console.log('Form data submitted successfully:', formData);
+      const id = await appwriteService.createdoc(newData);
+      console.log('Form data submitted successfully:', id);
+      const doc = await appwriteService.getdoc(id);
+      console.log('Document retrieved successfully:', doc);
     } catch (err) {
       console.error('Error occurred:', err);
       setError('An error occurred. Please submit again.');
@@ -90,85 +105,85 @@ function Form() {
             {/* Leader Fields */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-9 mx-auto max-w-screen-lg bg-zinc-900 p-8 rounded-xl">
               <div className='flex flex-col'>
-              {errors.leaderName && <p className="text-red-600">{errors.leaderName.message}</p>}
-              <Input
+                {errors.leaderName && <p className="text-red-600">{errors.leaderName.message}</p>}
+                <Input
 
-                label="Leader Name"
-                placeholder="Enter leader name"
-                type="text"
-                {...register('leaderName')}
-              />
-              
+                  label="Leader Name"
+                  placeholder="Enter leader name"
+                  type="text"
+                  {...register('leaderName')}
+                />
+
               </div>
 
               <div className='flex flex-col'>
-              {errors.leaderPhone && <p className="text-red-600">{errors.leaderPhone.message}</p>}
-              
-              <Input
-                label="Leader Phone"
-                placeholder="Enter leader phone"
-                type="text"
-                {...register('leaderPhone')}
-              />
+                {errors.leaderPhone && <p className="text-red-600">{errors.leaderPhone.message}</p>}
+
+                <Input
+                  label="Leader Phone"
+                  placeholder="Enter leader phone"
+                  type="text"
+                  {...register('leaderPhone')}
+                />
               </div>
 
               <div className='flex flex-col'>
-              {errors.leaderEmail && <p className="text-red-600">{errors.leaderEmail.message}</p>}
-              
-              <Input
-                label="Leader Email"
-                placeholder="Enter leader email"
-                type="text"
-                {...register('leaderEmail',{required:true})}
-              />
+                {errors.leaderEmail && <p className="text-red-600">{errors.leaderEmail.message}</p>}
+
+                <Input
+                  label="Leader Email"
+                  placeholder="Enter leader email"
+                  type="text"
+                  {...register('leaderEmail', { required: true })}
+                />
               </div>
 
               <div className='flex flex-col'>
-              {errors.leaderBranch && <p className="text-red-600">{errors.leaderBranch.message}</p>}
-              
-              <Input
-                label="Leader Branch"
-                placeholder="Enter leader Branch"
-                type="text"
-                {...register('leaderBranch',{required:true})}
-              />
+                {errors.leaderBranch && <p className="text-red-600">{errors.leaderBranch.message}</p>}
+
+                <Input
+                  label="Leader Branch"
+                  placeholder="Enter leader Branch"
+                  type="text"
+                  {...register('leaderBranch', { required: true })}
+                />
               </div>
 
-              
+
             </div>
 
             {/* Members */}
             {[1, 2, 3, 4].map((index) => (
               <div key={index} className='grid grid-cols-1 md:grid-cols-2 gap-9 mx-auto bg-zinc-900 p-8 rounded-xl max-w-screen-lg'>
                 <Input
-                name={`member${index}`}
+                  name={`member${index}`}
                   label={`Member ${index} Name`}
                   placeholder={`Enter name for member ${index}`}
                   type="text"
-                  {...register(`members.${index-1}.name`)}
+                  {...register(`members.${index - 1}.name`)}
                 />
                 <Input
-                name={`phone${index}`}
+                  name={`phone${index}`}
                   label={`Member ${index} Phone`}
                   placeholder={`Enter phone for member ${index}`}
                   type="text"
-                  {...register(`members.${index - 1}.phone` )}
+                  {...register(`members.${index - 1}.phone`)}
                   required={true}
                 />
                 <Input
-                
+
                   label={`Member ${index} Email`}
                   placeholder={`Enter Email for member ${index}`}
                   type="text"
-                  {...register(`members.${index - 1}.Email` )}
+                  {...register(`members.${index - 1}.Email`)}
                   required={true}
                 />
                 <Input
-                name={`Branch${index}`}
+                  name={`Branch${index}`}
                   label={`Member ${index} Branch`}
                   placeholder={`Enter Branch for member ${index}`}
                   type="text"
-                  {...register(`members.${index - 1}.Branch` )}
+                  {...register(`members.${index - 1}.Branch`)}
                   required={true}
                 />
                 {errors.members?.[index - 1]?.phone && (
@@ -176,14 +191,28 @@ function Form() {
                 )}
               </div>
             ))}{/* Submit Button */}
-            
+
             <Button className="w-full bg-blue-600 text-white py-2 rounded" type="submit">
               SUBMIT
             </Button>
           </div>
         </form>
+
+      </div>
+      <div style={{ display: 'none' }}>
+        <RazorpayButton
+          ref={razorpayButtonRef}
+          amount={249} // Registration fee (e.g., 249 INR)
+          currency="INR"
+          leaderName
+          leaderPhone
+          leaderEmail
+          onSuccess={handlePaymentSuccess}
+          onFailure={handlePaymentFailure}
+        />
       </div>
     </div>
+
   );
 }
 

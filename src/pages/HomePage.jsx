@@ -4,7 +4,7 @@ import Container from '../components/Container'
 
 function HomePage() {
   return (
-    <div className='flex items-center justify-center w-screen h-screen bg-zinc-900 '>
+    <div className='flex items-center justify-center w-full min-h-screen'>
         <Container>
             <Home />
         </Container>
