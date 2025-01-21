@@ -36,9 +36,9 @@ const RazorpayButton = React.forwardRef(({ amount, currency,leaderName,leaderEma
         }
       },
       prefill: {
-        leaderName,
-        leaderEmail,
-        leaderPhone,
+        name: leaderName,
+        email: leaderEmail,
+        contact: leaderPhone,
       },
       notes: {
         purpose: "Registration",

@@ -1,11 +1,10 @@
 import React from 'react'
-import RegForm from '../components/Form/Form'
+import Form from '../components/Form/Form'
 
 function FormPage() {
   return (
     <div>
-        <h1>Form</h1>
-        <RegForm />
+        <Form />
     </div>
   )
 }

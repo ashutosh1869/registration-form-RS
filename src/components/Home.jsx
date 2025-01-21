@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
@@ -33,11 +34,13 @@ const Home = () => {
 
       {/* Logo */}
       <div className="absolute top-6 left-6 z-10 shadow-lg shadow-red-500/50 rounded-full">
+      <Link to="/">
         <img
           src="/images/logo.png" // Replace with your image URL
           alt="Logo"
           className="w-16 h-16 rounded-full"
         />
+        </Link>
       </div>
 
 

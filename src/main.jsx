@@ -6,6 +6,8 @@ import Home from './pages/HomePage'
 import Form from './pages/FormPage'
 import App from './App'
 import Success from './pages/Success'
+import FormPage from './pages/FormPage'
+import HomePage from './pages/HomePage'
 
 
 const router = createBrowserRouter([
@@ -15,20 +17,15 @@ const router = createBrowserRouter([
     children: [
         {
             path: "/",
-            element: <Home />,
+            element: <HomePage />,
         },
         {
             path: "/form",
             element: (
-              <Form />
+              <FormPage />
             ),
         },
-        {
-            path: "/success",
-            element: (
-              <Success />
-            ),
-        },
+        
        
     ],
 },

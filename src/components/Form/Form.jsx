@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import RazorpayButton from "..//RazorpayButton";
+import { Link } from 'react-router-dom';
 
 const schema = z.object({
   leaderName: z.string().nonempty("Leader name is required"),
@@ -33,6 +34,7 @@ const schema = z.object({
 });
 
 function Form() {
+  const [formData, setFormData] = useState(null);
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
   });
@@ -82,8 +84,9 @@ function Form() {
     };
 
     console.log('New data:', newData);
-    // razorpayButtonRef.current.click();
-    
+    setFormData(newData);
+    razorpayButtonRef.current.click();
+
 
     try {
       const id = await appwriteService.createdoc(newData);
@@ -97,119 +100,161 @@ function Form() {
   };
 
   return (
-    <div className="flex items-center justify-center">
-      <div className="w-full max-w-lg bg-black-100 rounded-xl p-10 border border-black/10">
-        {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
-        <form onSubmit={handleSubmit(create)}>
-          <div className="space-y-5">
-            {/* Leader Fields */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-9 mx-auto max-w-screen-lg bg-zinc-900 p-8 rounded-xl">
-              <div className='flex flex-col'>
-                {errors.leaderName && <p className="text-red-600">{errors.leaderName.message}</p>}
-                <Input
+    <div className="min-h-screen w-full bg-gray-900 p-10 text-white flex justify-center align-middle
+     relative box-border overflow-x-hidden">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-contain bg-no-repeat bg-fixed bg-center"
+        style={{
+          backgroundImage: 'url("/images/rs-logo.png")', // Replace with your image URL
+          zIndex: 0,
+        }}
+      />
+      {/* Glass Effect Overlay */}
+      <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-md z-2 min-h-screen" />
 
-                  label="Leader Name"
-                  placeholder="Enter leader name"
-                  type="text"
-                  {...register('leaderName')}
-                />
-
-              </div>
-
-              <div className='flex flex-col'>
-                {errors.leaderPhone && <p className="text-red-600">{errors.leaderPhone.message}</p>}
-
-                <Input
-                  label="Leader Phone"
-                  placeholder="Enter leader phone"
-                  type="text"
-                  {...register('leaderPhone')}
-                />
-              </div>
-
-              <div className='flex flex-col'>
-                {errors.leaderEmail && <p className="text-red-600">{errors.leaderEmail.message}</p>}
-
-                <Input
-                  label="Leader Email"
-                  placeholder="Enter leader email"
-                  type="text"
-                  {...register('leaderEmail', { required: true })}
-                />
-              </div>
-
-              <div className='flex flex-col'>
-                {errors.leaderBranch && <p className="text-red-600">{errors.leaderBranch.message}</p>}
-
-                <Input
-                  label="Leader Branch"
-                  placeholder="Enter leader Branch"
-                  type="text"
-                  {...register('leaderBranch', { required: true })}
-                />
-              </div>
-
-
-            </div>
-
-            {/* Members */}
-            {[1, 2, 3, 4].map((index) => (
-              <div key={index} className='grid grid-cols-1 md:grid-cols-2 gap-9 mx-auto bg-zinc-900 p-8 rounded-xl max-w-screen-lg'>
-                <Input
-                  name={`member${index}`}
-                  label={`Member ${index} Name`}
-                  placeholder={`Enter name for member ${index}`}
-                  type="text"
-                  {...register(`members.${index - 1}.name`)}
-                />
-                <Input
-                  name={`phone${index}`}
-                  label={`Member ${index} Phone`}
-                  placeholder={`Enter phone for member ${index}`}
-                  type="text"
-                  {...register(`members.${index - 1}.phone`)}
-                  required={true}
-                />
-                <Input
-
-                  label={`Member ${index} Email`}
-                  placeholder={`Enter Email for member ${index}`}
-                  type="text"
-                  {...register(`members.${index - 1}.Email`)}
-                  required={true}
-                />
-                <Input
-                  name={`Branch${index}`}
-                  label={`Member ${index} Branch`}
-                  placeholder={`Enter Branch for member ${index}`}
-                  type="text"
-                  {...register(`members.${index - 1}.Branch`)}
-                  required={true}
-                />
-                {errors.members?.[index - 1]?.phone && (
-                  <p className="text-red-600">{errors.members[index - 1].phone.message}</p>
-                )}
-              </div>
-            ))}{/* Submit Button */}
-
-            <Button className="w-full bg-blue-600 text-white py-2 rounded" type="submit">
-              SUBMIT
-            </Button>
-          </div>
-        </form>
-
+      {/* Dotted Pattern */}
+      <div className="absolute top-0 right-0 w-1/2 h-1/2 opacity-20 z-10">
+        <div className="grid grid-cols-12 gap-2">
+          {[...Array(48)].map((_, index) => (
+            <div
+              key={index}
+              className="w-2 h-2 bg-red-500 rounded-full shadow-red-500/70 shadow-lg"
+            />
+          ))}
+        </div>
       </div>
-      <div style={{ display: 'none' }}>
-        <RazorpayButton
-          ref={razorpayButtonRef}
-          amount={249} // Registration fee (e.g., 249 INR)
-          currency="INR"
-          leaderName
-          leaderPhone
-          leaderEmail
-          onSuccess={handlePaymentSuccess}
-          onFailure={handlePaymentFailure}
-        />
+
+
+
+
+
+      {/* Logo */}
+      <div className="absolute top-6 left-6 z-10 shadow-lg shadow-red-500/50 rounded-full">
+        <Link to="/">
+          <img
+            src="/images/logo.png" // Replace with your image URL
+            alt="Logo"
+            className="w-16 h-16 rounded-full"
+          />
+        </Link>
+      </div>
+      <div className="flex items-center justify-center">
+        <div className="w-full max-w-lg bg-black-100 rounded-xl p-10 border z-10 border-black/10">
+          {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
+          <form onSubmit={handleSubmit(create)}>
+            <div className="space-y-5">
+              {/* Leader Fields */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-9 mx-auto max-w-screen-lg bg-red-400/10 shadow-xl backdrop:blur-3xl p-8 rounded-xl">
+                <div className='flex flex-col'>
+                  {errors.leaderName && <p className="text-red-600">{errors.leaderName.message}</p>}
+                  <Input
+
+                    label="Leader Name"
+                    placeholder="Enter leader name"
+                    type="text"
+                    {...register('leaderName')}
+                  />
+
+                </div>
+
+                <div className='flex flex-col'>
+                  {errors.leaderPhone && <p className="text-red-600">{errors.leaderPhone.message}</p>}
+
+                  <Input
+                    label="Leader Phone"
+                    placeholder="Enter leader phone"
+                    type="text"
+                    {...register('leaderPhone')}
+                  />
+                </div>
+
+                <div className='flex flex-col'>
+                  {errors.leaderEmail && <p className="text-red-600">{errors.leaderEmail.message}</p>}
+
+                  <Input
+                    label="Leader Email"
+                    placeholder="Enter leader email"
+                    type="text"
+                    {...register('leaderEmail', { required: true })}
+                  />
+                </div>
+
+                <div className='flex flex-col'>
+                  {errors.leaderBranch && <p className="text-red-600">{errors.leaderBranch.message}</p>}
+
+                  <Input
+                    label="Leader Branch"
+                    placeholder="Enter leader Branch"
+                    type="text"
+                    {...register('leaderBranch', { required: true })}
+                  />
+                </div>
+
+
+              </div>
+
+              {/* Members */}
+              {[1, 2, 3, 4].map((index) => (
+                <div key={index} className='grid grid-cols-1 md:grid-cols-2 gap-9 mx-auto bg-red-400/10 shadow-xl backdrop:blur-3x p-8 rounded-xl max-w-screen-lg'>
+                  <Input
+                    name={`member${index}`}
+                    label={`Member ${index} Name`}
+                    placeholder={`Enter name for member ${index}`}
+                    type="text"
+                    {...register(`members.${index - 1}.name`)}
+                  />
+                  <Input
+                    name={`phone${index}`}
+                    label={`Member ${index} Phone`}
+                    placeholder={`Enter phone for member ${index}`}
+                    type="text"
+                    {...register(`members.${index - 1}.phone`)}
+                    required={true}
+                  />
+                  <Input
+
+                    label={`Member ${index} Email`}
+                    placeholder={`Enter Email for member ${index}`}
+                    type="text"
+                    {...register(`members.${index - 1}.Email`)}
+                    required={true}
+                  />
+                  <Input
+                    name={`Branch${index}`}
+                    label={`Member ${index} Branch`}
+                    placeholder={`Enter Branch for member ${index}`}
+                    type="text"
+                    {...register(`members.${index - 1}.Branch`)}
+                    required={true}
+                  />
+                  {errors.members?.[index - 1]?.phone && (
+                    <p className="text-red-600">{errors.members[index - 1].phone.message}</p>
+                  )}
+                </div>
+              ))}{/* Submit Button */}
+
+              <Button className="w-full bg-red-600 text-white py-2 rounded" type="submit">
+                SUBMIT
+              </Button>
+            </div>
+          </form>
+
+        </div>
+        {formData && (
+          <div style={{ display: 'none' }}>
+            <RazorpayButton
+              ref={razorpayButtonRef}
+              amount={249} // Registration fee
+              currency="INR"
+              leaderName={formData.leaderName}
+              leaderPhone={formData.leaderPhone}
+              leaderEmail={formData.leaderEmail}
+              onSuccess={handlePaymentSuccess}
+              onFailure={handlePaymentFailure}
+            />
+          </div>
+        )}
       </div>
     </div>
 
