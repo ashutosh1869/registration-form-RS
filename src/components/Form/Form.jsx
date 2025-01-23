@@ -19,7 +19,6 @@ const schema = z.object({
       z.object({
         name: z.string().nonempty(),
         phone: z
-
           .string()
           .regex(/^\d{10}$/, "phone must contain exactly 10 digits")
           .nonempty(),
@@ -28,9 +27,6 @@ const schema = z.object({
       })
     )
     .nonempty(),
-
-
-
 });
 
 function Form() {
@@ -42,7 +38,6 @@ function Form() {
   const [error, setError] = useState('');
   const handlePaymentSuccess = (response) => {
     console.log("Payment successful:", response);
-    // Save data to Appwrite or handle success
   };
 
   const handlePaymentFailure = (error) => {
@@ -87,7 +82,6 @@ function Form() {
     setFormData(newData);
     razorpayButtonRef.current.click();
 
-
     try {
       const id = await appwriteService.createdoc(newData);
       console.log('Form data submitted successfully:', id);
@@ -100,13 +94,12 @@ function Form() {
   };
 
   return (
-    <div className="min-h-screen w-full bg-gray-900 p-10 text-white flex justify-center align-middle
-     relative box-border overflow-x-hidden">
+    <div className="min-h-screen w-full bg-gray-900 p-5 md:p-10 text-white flex justify-center items-center relative box-border overflow-x-hidden">
       {/* Background Image */}
       <div
         className="absolute inset-0 bg-contain bg-no-repeat bg-fixed bg-center"
         style={{
-          backgroundImage: 'url("/images/rs-logo.png")', // Replace with your image URL
+          backgroundImage: 'url("/images/robot1.jpg")',
           zIndex: 0,
         }}
       />
@@ -125,42 +118,35 @@ function Form() {
         </div>
       </div>
 
-
-
-
-
       {/* Logo */}
       <div className="absolute top-6 left-6 z-10 shadow-lg shadow-red-500/50 rounded-full">
         <Link to="/">
           <img
-            src="/images/logo.png" // Replace with your image URL
+            src="/images/logo.png"
             alt="Logo"
-            className="w-16 h-16 rounded-full"
+            className="w-12 h-12 md:w-16 md:h-16 rounded-full"
           />
         </Link>
       </div>
-      <div className="flex items-center justify-center">
-        <div className="w-full max-w-lg bg-black-100 rounded-xl p-10 border z-10 border-black/10">
+      <div className="flex items-center justify-center w-full">
+        <div className="w-full max-w-lg bg-black-100 rounded-xl p-6 md:p-10 border z-10 border-black/10">
           {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
           <form onSubmit={handleSubmit(create)}>
             <div className="space-y-5">
               {/* Leader Fields */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-9 mx-auto max-w-screen-lg bg-red-400/10 shadow-xl backdrop:blur-3xl p-8 rounded-xl">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-9 mx-auto max-w-screen-lg bg-red-400/10 shadow-xl backdrop:blur-3xl p-6 md:p-8 rounded-xl">
                 <div className='flex flex-col'>
                   {errors.leaderName && <p className="text-red-600">{errors.leaderName.message}</p>}
                   <Input
-
                     label="Leader Name"
                     placeholder="Enter leader name"
                     type="text"
                     {...register('leaderName')}
                   />
-
                 </div>
 
                 <div className='flex flex-col'>
                   {errors.leaderPhone && <p className="text-red-600">{errors.leaderPhone.message}</p>}
-
                   <Input
                     label="Leader Phone"
                     placeholder="Enter leader phone"
@@ -171,7 +157,6 @@ function Form() {
 
                 <div className='flex flex-col'>
                   {errors.leaderEmail && <p className="text-red-600">{errors.leaderEmail.message}</p>}
-
                   <Input
                     label="Leader Email"
                     placeholder="Enter leader email"
@@ -182,7 +167,6 @@ function Form() {
 
                 <div className='flex flex-col'>
                   {errors.leaderBranch && <p className="text-red-600">{errors.leaderBranch.message}</p>}
-
                   <Input
                     label="Leader Branch"
                     placeholder="Enter leader Branch"
@@ -190,13 +174,11 @@ function Form() {
                     {...register('leaderBranch', { required: true })}
                   />
                 </div>
-
-
               </div>
 
               {/* Members */}
               {[1, 2, 3, 4].map((index) => (
-                <div key={index} className='grid grid-cols-1 md:grid-cols-2 gap-9 mx-auto bg-red-400/10 shadow-xl backdrop:blur-3x p-8 rounded-xl max-w-screen-lg'>
+                <div key={index} className='grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-9 mx-auto bg-red-400/10 shadow-xl backdrop:blur-3x p-6 md:p-8 rounded-xl max-w-screen-lg'>
                   <Input
                     name={`member${index}`}
                     label={`Member ${index} Name`}
@@ -213,7 +195,6 @@ function Form() {
                     required={true}
                   />
                   <Input
-
                     label={`Member ${index} Email`}
                     placeholder={`Enter Email for member ${index}`}
                     type="text"
@@ -232,20 +213,20 @@ function Form() {
                     <p className="text-red-600">{errors.members[index - 1].phone.message}</p>
                   )}
                 </div>
-              ))}{/* Submit Button */}
+              ))}
 
+              {/* Submit Button */}
               <Button className="w-full bg-red-600 text-white py-2 rounded" type="submit">
                 SUBMIT
               </Button>
             </div>
           </form>
-
         </div>
         {formData && (
           <div style={{ display: 'none' }}>
             <RazorpayButton
               ref={razorpayButtonRef}
-              amount={249} // Registration fee
+              amount={149}
               currency="INR"
               leaderName={formData.leaderName}
               leaderPhone={formData.leaderPhone}
@@ -257,7 +238,6 @@ function Form() {
         )}
       </div>
     </div>
-
   );
 }
 

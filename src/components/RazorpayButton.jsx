@@ -22,13 +22,15 @@ const RazorpayButton = React.forwardRef(({ amount, currency,leaderName,leaderEma
     }
 
     const options = {
-      key: "YOUR_RAZORPAY_KEY_ID", // Replace with your Razorpay Key ID
+      key: "rzp_test_2gpfYWLiNLy38w", // Replace with your Razorpay Key ID
       amount: amount * 100, // Amount in paisa
       currency: currency,
       name: "Your Website Name",
       description: "Registration Payment",
       image: "RS_logo.png", // Replace with your logo URL
       handler: (response) => {
+        console.log("Handler triggered!");
+        console.log("Payment Response:", response);
         if (response.razorpay_payment_id) {
           onSuccess(response);
         } else {
