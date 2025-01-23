@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
-function Container({children}) {
+function Container({ children }) {
   return (
-    <div className='flex items-center justify-center w-full h-full '>
-        {children}
+    <div className="flex items-center justify-center w-full h-full ">
+      {children}
     </div>
-  )
+  );
 }
 
-export default Container
+export default Container;
