@@ -226,7 +226,7 @@ function Form() {
           <div style={{ display: 'none' }}>
             <RazorpayButton
               ref={razorpayButtonRef}
-              amount={149}
+              amount={1}
               currency="INR"
               leaderName={formData.leaderName}
               leaderPhone={formData.leaderPhone}
