@@ -117,20 +117,23 @@ const Home = () => {
           </p>
           <div className="flex justify-center md:justify-start space-x-6">
             <a
-              href="#"
-              className="text-gray-400 hover:text-pink-500 transition duration-300 "
+              href="https://www.instagram.com/vssut_robotics?igsh=bWN0ZGlnc2xvcW95"
+              className="text-pink-500 md:text-gray-400 md:hover:text-pink-500 transition duration-300 "
+              target='_blank'
             >
               <FaInstagram className="w-12 h-12 md:w-8 md:h-8" />
             </a>
             <a
-              href="#"
-              className="text-gray-400 hover:text-blue-600 transition duration-300"
+              href="https://www.linkedin.com/company/vssutrobotics/posts/?feedView=all"
+              className="text-blue-600 md:text-gray-400 md:hover:text-blue-600 transition duration-300"
+              target='_blank'
             >
               <FaLinkedin className="w-12 h-12 md:w-8 md:h-8" />
             </a>
             <a
               href="#"
-              className="text-gray-400 hover:text-red-500 transition duration-300"
+              className="text-red-500 md:text-gray-400 md:hover:text-red-500 transition duration-300"
+              target='_blank'
             >
               <FaEnvelope className="w-12 h-12 md:w-8 md:h-8" />
             </a>
