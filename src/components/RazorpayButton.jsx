@@ -25,7 +25,7 @@ const RazorpayButton = React.forwardRef(({ amount, currency,leaderName,leaderEma
       key: "rzp_test_2gpfYWLiNLy38w", // Replace with your Razorpay Key ID
       amount: amount * 100, // Amount in paisa
       currency: currency,
-      name: "Your Website Name",
+      name: "RS Registration Fees",
       description: "Registration Payment",
       image: "RS_logo.png", // Replace with your logo URL
       handler: (response) => {
