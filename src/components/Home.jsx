@@ -1,22 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { FaInstagram, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 
 const Home = () => {
   return (
-    <div className="min-h-screen w-full bg-gray-900 p-5 md:p-10 text-white flex flex-col md:flex-row justify-center align-middle relative box-border overflow-x-hidden">
+    <div className="min-h-screen w-full bg-gray-900 p-6 text-white flex flex-col md:flex-row justify-center items-center relative overflow-x-hidden">
       {/* Background Image */}
       <div
-        className="absolute inset-0 bg-contain bg-no-repeat bg-fixed bg-center"
+        className="absolute inset-0 bg-contain bg-no-repeat bg-center"
         style={{
           backgroundImage: 'url("/images/rs-logo.png")', 
           zIndex: 0,
         }}
       />
       {/* Glass Effect Overlay */}
-      <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-md z-2 min-h-screen" />
+      <div className="absolute inset-0 bg-black bg-opacity-60 backdrop-blur-md z-2" />
 
       {/* Dotted Pattern */}
-      <div className="absolute top-0 right-0 w-1/2 h-1/2 opacity-20 z-10 hidden lg:block">
+      <div className="absolute top-0 right-0 w-1/2 h-1/2 opacity-20 z-10 hidden md:block">
         <div className="grid grid-cols-12 gap-2">
           {[...Array(48)].map((_, index) => (
             <div
@@ -28,8 +29,10 @@ const Home = () => {
       </div>
 
       {/* Logo */}
+
       <div className="absolute top-4 left-4 md:top-6 md:left-6 z-10 flex items-center">
         <Link to="/" className="shadow-lg shadow-red-500/50 rounded-full">
+
           <img
             src="/images/logo.png"
             alt="Logo"
@@ -89,9 +92,9 @@ const Home = () => {
       </div>
 
       {/* Main Content Container */}
-      <div className="container w-full px-5 md:px-20 py-16 grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-4 relative z-10">
+      <div className="container mx-auto px-4 md:px-20 py-12 grid grid-cols-1 md:grid-cols-2 gap-8 relative z-10">
         {/* Text Content */}
-        <div className="w-full flex flex-col justify-center space-y-8">
+        <div className="flex flex-col justify-center space-y-6 text-center md:text-left">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
               RoboXplore
@@ -138,10 +141,11 @@ const Home = () => {
 </div>
 
 
-          <a href="/form" className="w-full flex">
+
+          <a href="/form" className="w-full flex justify-center md:justify-start">
             <button
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 w-full md:w-3/4 rounded-sm
-              transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg shadow-red-600/50"
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 w-3/4 md:w-auto rounded-sm
+            transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg shadow-red-600/50"
             >
               Get Started
             </button>
@@ -213,16 +217,21 @@ const Home = () => {
               className="text-gray-300 hover:text-red-500 text-3xl transition duration-300"
             >
               <i className="fas fa-envelope"></i>
+
             </a>
           </div>
+
+
         </div>
 
         {/* Image Section */}
-        <div className="w-full relative z-10 flex justify-center">
+        <div className="w-full flex justify-center md:justify-start">
           <img
             src="/images/image-1.png"
             alt="Featured"
+
             className="object-cover rounded-lg shadow-sm hover:shadow-lg shadow-red-200/20 w-2/5 lg:w-1/2 h-36 lg:h-auto border-double border-4 border-gray-600"
+
           />
         </div>
       </div>
@@ -230,4 +239,6 @@ const Home = () => {
   );
 };
 
+
 export default Home;
+
