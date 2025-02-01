@@ -244,3 +244,4 @@ const Home = () => {
 
 export default Home;
 
+console.log('Home component rendered');
