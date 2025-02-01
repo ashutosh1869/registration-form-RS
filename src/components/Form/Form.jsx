@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Input from '../Input';
 import Button from '../Button';
 import appwriteService from '../../appwrite/config';
@@ -38,6 +38,7 @@ const schema = z.object({
   }),
 });
 
+
 // Terms and Conditions Popup Component
 const TermsPopup = ({ isOpen, onClose, title, content }) => {
   if (!isOpen) return null;
@@ -57,6 +58,7 @@ const TermsPopup = ({ isOpen, onClose, title, content }) => {
     </div>
   );
 };
+
 
 function Form() {
   const [formData, setFormData] = useState(null);
@@ -78,6 +80,13 @@ function Form() {
     console.error("Payment failed:", error);
     alert("Payment failed. Please try again.");
   };
+  useEffect(() => {
+    if (formData) {
+      console.log("Triggering RazorpayButton with updated formData");
+      razorpayButtonRef.current.click();
+    }
+  }, [formData]);
+
 
   const create = async (data) => {
     // Filter out incomplete member entries
@@ -350,7 +359,7 @@ This extraction covers all key points from the original document, presenting a c
       <div
         className="absolute inset-0 bg-contain bg-no-repeat bg-fixed bg-center"
         style={{
-          backgroundImage: 'url("/images/robot1.jpg")',
+          backgroundImage: 'url("/images/rs-logo.png")',
           zIndex: 0,
         }}
       />
@@ -379,8 +388,8 @@ This extraction covers all key points from the original document, presenting a c
           />
         </Link>
       </div>
-      <div className="flex items-center justify-center w-full">
-        <div className="w-full max-w-lg bg-black-100 rounded-xl p-6 md:p-10 border z-10 border-black/10">
+      <div className="flex mt-10 items-center justify-center w-full">
+        <div className="w-full max-w-3/4 bg-black-100 rounded-xl mt-15 p-6 md:p-10 border z-10 border-black/10">
           {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
           <form onSubmit={handleSubmit(create)}>
             <div className="space-y-5">
@@ -528,9 +537,11 @@ This extraction covers all key points from the original document, presenting a c
               </div>
 
               {/* Submit Button */}
-              <Button className="w-full bg-red-600 text-white py-2 rounded" type="submit">
+             <div className='flex justify-center'>
+             <Button className="w-full max-w-md bg-red-600 text-white py-2 rounded" type="submit">
                 SUBMIT
               </Button>
+             </div>
             </div>
           </form>
         </div>
@@ -538,7 +549,9 @@ This extraction covers all key points from the original document, presenting a c
           <div style={{ display: 'none' }}>
             <RazorpayButton
               ref={razorpayButtonRef}
+
               amount={150}
+
               currency="INR"
               leaderName={formData.leaderName}
               leaderPhone={formData.leaderPhone}
