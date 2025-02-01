@@ -220,11 +220,13 @@ const Home = () => {
         {/* Image Section */}
         <div className="w-full relative z-10 flex justify-center">
           <img
-            src="/images/image-1.png"
+            src="/images/line following.png"
             alt="Featured"
             className="object-cover rounded-lg shadow-sm hover:shadow-lg shadow-red-200/20 w-2/5 lg:w-1/2 h-36 lg:h-auto border-double border-4 border-gray-600"
           />
         </div>
+
+        
       </div>
     </div>
   );
