@@ -26,11 +26,18 @@ const schema = z.object({
         Branch: z.string().optional(),
       })
     )
-    .transform(members => members.filter(member => 
-      member.name && member.phone && member.Email && member.Branch
-    ))
-    .refine(members => members.length >= 3 && members.length <= 4, 
-      { message: "At least 3 members and maximum 4 members are required" }),
+    .transform(members => {
+      // Ensure the first 3 members have all required fields
+      const firstThreeMembers = members.slice(0, 3).filter(member => 
+        member.name && member.phone && member.Email && member.Branch
+      );
+      // The 4th member is optional and can have incomplete fields
+      const fourthMember = members[3] || null;
+      return [...firstThreeMembers, fourthMember].filter(Boolean); // Remove null/undefined
+    })
+    .refine(members => members.length >= 3 && members.length <= 4, { 
+      message: "At least 3 members and maximum 4 members are required" 
+    }),
   
   // Added terms and conditions validation
   termsConditions: z.boolean().refine(val => val === true, { 
@@ -481,7 +488,7 @@ This extraction covers all key points from the original document, presenting a c
                   <Button 
                     type="button" 
                     className="bg-red-500 text-white py-2 px-4 rounded"
-                    onClick={() => setMemberCount(prev => Math.max(3, prev - 1))}
+                    onClick={() => setMemberCount(3)}
                   >
                     Remove Member
                   </Button>
@@ -490,7 +497,7 @@ This extraction covers all key points from the original document, presenting a c
                   <Button 
                     type="button" 
                     className="bg-green-500 text-white py-2 px-4 rounded"
-                    onClick={() => setMemberCount(prev => Math.min(4, prev + 1))}
+                    onClick={() => setMemberCount(4)}
                   >
                     Add Member
                   </Button>
@@ -498,7 +505,7 @@ This extraction covers all key points from the original document, presenting a c
               </div>
 
               {/* Terms and Conditions Section */}
-              <div className="space-y-3">
+              <div className="space-y-3 mx-auto flex flex-col items-center justify-center">
                 {termsDetails.map((term, index) => (
                   <div key={index} className="flex items-center">
                     <button
