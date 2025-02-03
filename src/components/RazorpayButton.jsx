@@ -70,7 +70,7 @@ const RazorpayButton = React.forwardRef(({ amount, formData, currency, leaderNam
 
           }
           console.log("Final Payment Details:", paymentDetails);
-          alert(`Payment Successful!\nPayment ID: ${paymentDetails.razorpay_payment_id}`);
+          navigate('/success');
           onSuccess(paymentDetails);
         } else {
           console.error("Payment failed or missing details:", response);
@@ -101,10 +101,7 @@ const RazorpayButton = React.forwardRef(({ amount, formData, currency, leaderNam
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
-  if(formData.payment_id){
-    console.log(formData.payment_id)
-    navigate('/success');
-  }
+  
 
   return (
     <button
