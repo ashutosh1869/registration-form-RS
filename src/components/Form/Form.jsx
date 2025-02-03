@@ -366,7 +366,7 @@ This extraction covers all key points from the original document, presenting a c
       <div
         className="absolute inset-0 bg-contain bg-no-repeat bg-fixed bg-center"
         style={{
-          backgroundImage: 'url("/images/rs-logo.png")',
+          backgroundImage: 'url("/images/robot1.jpg")',
           zIndex: 0,
         }}
       />
@@ -557,7 +557,7 @@ This extraction covers all key points from the original document, presenting a c
             <RazorpayButton
               ref={razorpayButtonRef}
 
-              amount={150}
+              amount={1}
 
               currency="INR"
               leaderName={formData.leaderName}
