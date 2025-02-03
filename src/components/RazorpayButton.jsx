@@ -89,13 +89,21 @@ const RazorpayButton = React.forwardRef(({ amount, formData, currency, leaderNam
       theme: {
         color: "#3399cc",
       },
+      method: {
+        netbanking: true,
+        card: true,
+        wallet: true,
+        upi: true,
+        qr: true, 
+      },
     };
 
     const paymentObject = new window.Razorpay(options);
     paymentObject.open();
   };
   if(formData.payment_id){
-    navigate("/success");
+    console.log(formData.payment_id)
+    navigate('/success');
   }
 
   return (
