@@ -1,9 +1,17 @@
-import React from "react";
+
+import React, { useEffect } from "react";
 import appwriteService from "../appwrite/config";
 import { useNavigate } from "react-router-dom";
 
 const RazorpayButton = React.forwardRef(({ amount, formData, currency, leaderName, leaderEmail, leaderPhone, onSuccess, onFailure }, ref) => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (formData.payment_id) {
+      navigate("/Success");
+    }
+  }, [formData.payment_id, navigate]);  // Runs when `payment_id` updates
+
   const loadRazorpay = async () => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -26,33 +34,17 @@ const RazorpayButton = React.forwardRef(({ amount, formData, currency, leaderNam
     }
 
     const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY, // Replace with your Razorpay Key ID
-      amount: amount * 100, // Amount in paisa
+
+      key: import.meta.env.VITE_RAZORPAY_KEY,
+      amount: amount * 100,
       currency: currency || "INR",
-      
-  
+
       name: "roboXplore",
       description: "Registration Payment",
       image: "/images/rs-logo.png",
       handler: async (response) => {
-        console.log("Handler triggered!");
-        console.log("Payment Response:", response);
-        // if (response.razorpay_payment_id) {
-        //   onSuccess(response);
-        // } 
-        //   if (response.razorpay_payment_id ) {
-        //     const paymentDetails = {
-        //       razorpay_payment_id: response.razorpay_payment_id,
-        //       razorpay_order_id: response.razorpay_order_id || "N/A", // Order ID if available
-        //     };
 
-        //     console.log("Final Payment Details:", paymentDetails);
-        //     onSuccess(paymentDetails); 
-        //   }
-        //   else {
-        //     onFailure("Payment failed. Please try again.");
-        //   }
-        // },
+        console.log("Payment Response:", response);
 
         if (response.razorpay_payment_id) {
           const paymentDetails = {
@@ -60,8 +52,11 @@ const RazorpayButton = React.forwardRef(({ amount, formData, currency, leaderNam
             razorpay_order_id: response.razorpay_order_id || "N/A",
             razorpay_signature: response.razorpay_signature || "N/A",
           };
+
           formData.payment_id = paymentDetails.razorpay_payment_id;
           console.log(formData);
+
+
           try {
             const docId = await appwriteService.createdoc(formData);
             console.log(docId);
@@ -69,6 +64,8 @@ const RazorpayButton = React.forwardRef(({ amount, formData, currency, leaderNam
             console.error("Payment failed or missing details:", error);
 
           }
+
+
           console.log("Final Payment Details:", paymentDetails);
           alert(`Payment Successful!\nPayment ID: ${paymentDetails.razorpay_payment_id}`);
           onSuccess(paymentDetails);
