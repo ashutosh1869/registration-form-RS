@@ -550,7 +550,7 @@ This extraction covers all key points from the original document, presenting a c
             <RazorpayButton
               ref={razorpayButtonRef}
 
-              amount={150}
+              amount={1}
 
               currency="INR"
               leaderName={formData.leaderName}
