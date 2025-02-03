@@ -25,6 +25,12 @@ const router = createBrowserRouter([
               <FormPage />
             ),
         },
+        {
+          path: "/success",
+          element:(
+            <Success />
+          )
+        }
         
        
     ],

@@ -70,6 +70,7 @@ const TermsPopup = ({ isOpen, onClose, title, content }) => {
 function Form() {
   const [formData, setFormData] = useState(null);
   const [memberCount, setMemberCount] = useState(3);
+  const [id,setId]=useState(null);
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: zodResolver(schema),
   });
@@ -116,6 +117,7 @@ function Form() {
       memberNumber: validMembers.map(member => member.phone),
       memberBranch: validMembers.map(member => member.Branch),
       memberEmail: validMembers.map(member => member.Email),
+      payment_id:null,
     };
 
     console.log('New data:', newData);
@@ -125,6 +127,7 @@ function Form() {
     try {
       const id = await appwriteService.createdoc(newData);
       console.log('Form data submitted successfully:', id);
+      setId(id);
       const doc = await appwriteService.getdoc(id);
       console.log('Document retrieved successfully:', doc);
     } catch (err) {
@@ -558,7 +561,7 @@ This extraction covers all key points from the original document, presenting a c
               ref={razorpayButtonRef}
 
               amount={1}
-
+              formData = {formData}
               currency="INR"
               leaderName={formData.leaderName}
               leaderPhone={formData.leaderPhone}

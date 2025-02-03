@@ -14,7 +14,7 @@ export class Service {
     async createdoc(data) {
         try {
 
-            const {  leaderName, leaderPhone,leaderEmail,leaderBranch, memberName,memberNumber,memberBranch,memberEmail} = data;
+            const {  leaderName,payment_id, leaderPhone,leaderEmail,leaderBranch, memberName,memberNumber,memberBranch,memberEmail} = data;
             const res=await this.databases.createDocument(
                 Conf.appwriteDatabaseId,
                 Conf.appwriteCollectionId,
@@ -28,7 +28,7 @@ export class Service {
                     memberNumber,
                     memberBranch,
                     memberEmail,
-                    
+                    payment_id,
                 }
                
 
@@ -51,6 +51,20 @@ export class Service {
             console.log("please submit again", error);
         }
     }
+    async updateDoc(id, payment_id) {
+        try {
+            if (!id) {
+                throw new Error("Document ID is required");
+            }
+            return await this.databases.updateDocument(Conf.appwriteDatabaseId, Conf.appwriteCollectionId, id, {
+                payment_id
+            });
+        } catch (error) {
+            console.log("please submit again", error);
+        }
+    }
+    
+
 
 }
 const appwriteService = new Service();
