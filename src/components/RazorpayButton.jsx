@@ -22,7 +22,7 @@ const RazorpayButton = React.forwardRef(({ amount, currency,leaderName,leaderEma
     }
 
     const options = {
-      key: "rzp_test_2gpfYWLiNLy38w", // Replace with your Razorpay Key ID
+      key: "rzp_live_bxbqBbCUobbAyt", // Replace with your Razorpay Key ID
       amount: amount * 100, // Amount in paisa
       currency: currency,
       name: "RS Registration Fees",
