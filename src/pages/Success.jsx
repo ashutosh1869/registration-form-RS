@@ -17,7 +17,7 @@ function Success() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [navigate]);
+  }, []);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-green-50 p-6 animate-fade-in">

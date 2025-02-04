@@ -40,29 +40,8 @@ export class Service {
         }
     }
 
-    async getdoc(id) {
-        //get a single document with the id variable
-        try {
-            if (!id) {
-                throw new Error("Document ID is required");
-            }
-            return await this.databases.getDocument(Conf.appwriteDatabaseId, Conf.appwriteCollectionId, id);
-        } catch (error) {
-            console.log("please submit again", error);
-        }
-    }
-    async updateDoc(id, payment_id) {
-        try {
-            if (!id) {
-                throw new Error("Document ID is required");
-            }
-            return await this.databases.updateDocument(Conf.appwriteDatabaseId, Conf.appwriteCollectionId, id, {
-                payment_id
-            });
-        } catch (error) {
-            console.log("please submit again", error);
-        }
-    }
+    
+    
     
 
 
