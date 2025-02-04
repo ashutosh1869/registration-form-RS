@@ -8,8 +8,11 @@ function App() {
 
   return (
     
-      <div className=' w-full min-h-screen'>
-        <Outlet />
+      <div className=' w-full flex text-center min-h-screen'>
+        {/* <Outlet /> */}
+        <p className='text-center text-4xl text-red-500 font-bold'>
+          We have closed due to server issues we will be back in few hours.
+        </p>
       </div>
       
    
