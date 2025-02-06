@@ -95,8 +95,8 @@ const Home = () => {
       </div>
 
       {/* Main Content Container */}
-      <div className="container w-full px-5 md:px-20 py-16 grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-4 relative z-10">
-        {/* Text Content */}
+      {/* <div className="container w-full px-5 md:px-20 py-16 grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-4 relative z-10">
+        Text Content 
         <div className="w-full flex flex-col justify-center space-y-8">
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
@@ -108,7 +108,7 @@ const Home = () => {
             Design. Develop. Dominate.
           </h4>
 
-          {/* Date */}
+           Date 
           <div className="flex flex-wrap items-center space-x-4">
             <div className="flex items-center space-x-2">
               <svg
@@ -152,7 +152,7 @@ const Home = () => {
           </a>
         </div>
 
-        {/* About Section */}
+        About Section
         <div className="w-full flex flex-col items-start md:items-center justify-center space-y-4 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
           <hr className="w-16 border-gray-500" />
           <p className="text-gray-300 font-semibold text-lg md:text-xl text-left md:text-center max-w-lg">
@@ -162,14 +162,15 @@ const Home = () => {
           </p>
         </div>
 
-        {/* Contact Section - Hidden on mobile, visible on desktop */}
+        
+
         <div className="w-full flex-col justify-center space-y-4 relative hidden md:flex">
           <hr className="w-1/6" />
           <p className="text-gray-300 font-semibold text-lg md:text-xl max-w-md">
             Contact us on our social media platforms or mail us for any queries.
           </p>
           <div className="flex items-center space-x-4">
-            {/* Home */}
+            
             <a
               href="https://vssutrobotics.vercel.app/"
               target="_blank"
@@ -182,7 +183,7 @@ const Home = () => {
               </span>
             </a>
 
-            {/* Facebook */}
+           
             <a
               href="https://www.facebook.com/vssutrobotics/"
               target="_blank"
@@ -195,7 +196,7 @@ const Home = () => {
               </span>
             </a>
 
-            {/* Twitter */}
+            
             <a
               href="https://twitter.com/societyrobotics?lang=en"
               target="_blank"
@@ -208,7 +209,6 @@ const Home = () => {
               </span>
             </a>
 
-            {/* Instagram */}
             <a
               href="https://www.instagram.com/vssut_robotics/?hl=en"
               target="_blank"
@@ -220,8 +220,6 @@ const Home = () => {
                 Instagram
               </span>
             </a>
-
-            {/* LinkedIn */}
             <a
               href="https://www.linkedin.com/company/vssutrobotics/mycompany/"
               target="_blank"
@@ -234,7 +232,6 @@ const Home = () => {
               </span>
             </a>
 
-            {/* Email */}
             <a
               href="mailto:your-email@example.com"
               className="text-gray-300 hover:text-red-500 text-3xl transition duration-300 relative group"
@@ -247,7 +244,7 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Image Section */}
+        
         <div className="w-full relative z-10 flex justify-center">
           <img
             src="/images/line following.png"
@@ -256,6 +253,13 @@ const Home = () => {
           />
         </div>
       </div>
+    </div> */}
+    <div className='w-3/4 flex flex-col  items-center justify-center h-min p-10 bg-white/70 rounded-lg my-auto transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105'>
+          <h1 className="text-2xl md:text-3xl lg:text-4xl text-black font-bold tracking-tight">We have reached our maximum limit of participants. Stay tuned for more events.</h1>
+          <h1 className='text-4xl md:text-5xl lg:text-6xl text-red-900 font-bold tracking-tight'>
+            Website is closed for further registrations.
+          </h1>
+        </div>
     </div>
   );
 };
