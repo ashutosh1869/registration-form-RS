@@ -26,7 +26,9 @@ const RazorpayButton = React.forwardRef(({ amount, formData, currency, leaderNam
     }
 
     const options = {
-      key: import.meta.env.VITE_RAZORPAY_KEY, // Replace with your Razorpay Key ID
+      key: {/*import.meta.env.VITE_RAZORPAY_KEY*/}
+            
+      , // Replace with your Razorpay Key ID
       amount: amount * 100, // Amount in paisa
       currency: currency || "INR",
       

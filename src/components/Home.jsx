@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen w-full bg-gray-900 p-5 md:p-10 text-white flex flex-col md:flex-row justify-center align-middle relative box-border overflow-x-hidden">
       {/* Background Image */}
@@ -95,64 +97,66 @@ const Home = () => {
       </div>
 
       {/* Main Content Container */}
-      {/* <div className="container w-full px-5 md:px-20 py-16 grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-4 relative z-10">
-        Text Content 
-        <div className="w-full flex flex-col justify-center space-y-8">
-          <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-              RoboXplore
-            </h1>
+      <div className="container w-full px-5 md:px-20 py-16 grid grid-cols-1 lg:grid-cols-2 gap-y-8 lg:gap-x-4 relative z-30">
+
+        {/* Text Content  */}
+          <div className="w-full flex flex-col justify-center space-y-8">
+            <div className="space-y-4">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
+                RoboXplore
+              </h1>
+            </div>
+
+            <h4 className="text-gray-200 text-xl font-semibold max-w-md">
+              Design. Develop. Dominate.
+            </h4>
+
+             Date 
+            <div className="flex flex-wrap items-center space-x-4">
+              <div className="flex items-center space-x-2">
+                <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 text-white"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+                >
+            <path
+              fillRule="evenodd"
+              d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zM4 8h12v8H4V8z"
+              clipRule="evenodd"
+            />
+                </svg>
+                <span className="text-white text-md font-bold">8 Feb - 9 Feb</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 text-white"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+                >
+            <path
+              fillRule="evenodd"
+              d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 8a1 1 0 00-1-1H7a1 1 0 100 2h2a1 1 0 001-1zm-1 4a1 1 0 100-2H7a1 1 0 100 2h2z"
+              clipRule="evenodd"
+            />
+                </svg>
+                <span className="text-white text-md font-bold">9:00 AM - 5:00 PM</span>
+              </div>
+            </div>
+
+            <div className="w-full flex">
+              <button
+                onClick={() => navigate('/form')}
+                className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 w-full md:w-3/4 rounded-sm
+              transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg shadow-red-600/50 z-30"
+              >
+                Get Started
+              </button>
+            </div>
           </div>
 
-          <h4 className="text-gray-200 text-xl font-semibold max-w-md">
-            Design. Develop. Dominate.
-          </h4>
-
-           Date 
-          <div className="flex flex-wrap items-center space-x-4">
-            <div className="flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-white"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zM4 8h12v8H4V8z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="text-white text-md font-bold">8 Feb - 9 Feb</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-white"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M10 2a8 8 0 100 16 8 8 0 000-16zm1 8a1 1 0 00-1-1H7a1 1 0 100 2h2a1 1 0 001-1zm-1 4a1 1 0 100-2H7a1 1 0 100 2h2z"
-                  clipRule="evenodd"
-                />
-              </svg>
-              <span className="text-white text-md font-bold">9:00 AM - 5:00 PM</span>
-            </div>
-          </div>
-
-          <a href="/form" className="w-full flex">
-            <button
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-3 w-full md:w-3/4 rounded-sm
-            transition duration-300 ease-in-out transform hover:-translate-y-1 shadow-lg shadow-red-600/50"
-            >
-              Get Started
-            </button>
-          </a>
-        </div>
-
-        About Section
+          {/* About Section */}
         <div className="w-full flex flex-col items-start md:items-center justify-center space-y-4 relative transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
           <hr className="w-16 border-gray-500" />
           <p className="text-gray-300 font-semibold text-lg md:text-xl text-left md:text-center max-w-lg">
@@ -253,14 +257,15 @@ const Home = () => {
           />
         </div>
       </div>
-    </div> */}
-    <div className='w-3/4 flex flex-col  items-center justify-center h-min p-10 bg-white/70 rounded-lg my-auto transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105'>
+      {/* <div className='w-3/4 flex flex-col  items-center justify-center h-min p-10 bg-white/70 rounded-lg my-auto transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105'>
           <h1 className="text-2xl md:text-3xl lg:text-4xl text-black font-bold tracking-tight">We have reached our maximum limit of participants. Stay tuned for more events.</h1>
           <h1 className='text-4xl md:text-5xl lg:text-6xl text-red-900 font-bold tracking-tight'>
             Website is closed for further registrations.
           </h1>
-        </div>
+        </div> */}
     </div>
+    
+    
   );
 };
 export default Home
